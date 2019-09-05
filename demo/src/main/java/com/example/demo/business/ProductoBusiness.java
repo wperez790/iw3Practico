@@ -109,7 +109,7 @@ public class ProductoBusiness implements IProductoBusiness {
 			throw new BusinessException(e);
 		}
 		if (!op.isPresent())
-			throw new NotFoundException("No se encuentra el producto con descripcion=" + descripcionProducto + "y precio= "+ precio );
+			throw new NotFoundException("No se encuentra la lista de productos con descripcion=" + descripcionProducto + "y precio= "+ precio );
 		return op.get();
 	}
 

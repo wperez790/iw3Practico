@@ -103,4 +103,15 @@ public class ProductoRestController {
 			return new ResponseEntity<Producto>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	@GetMapping(value = "/descripcionAndPrecioList")
+	public ResponseEntity<Producto> findByDercipcionOrderByPrecioAsc(@RequestParam("desc") String descripcionProducto, @RequestParam("p") double precio) {
+		try {
+			return new ResponseEntity<Producto>(productoBusiness.findByDescripcionAndPrecio(descripcionProducto, precio), HttpStatus.OK);
+		} catch (BusinessException e) {
+			return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (NotFoundException e) {
+			return new ResponseEntity<Producto>(HttpStatus.NOT_FOUND);
+		}
+	}
 }
