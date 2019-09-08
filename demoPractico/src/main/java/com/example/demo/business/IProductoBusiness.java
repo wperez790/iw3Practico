@@ -18,8 +18,8 @@ public interface IProductoBusiness {
 	
 	public Producto findByDescripcionAndPrecio(String descripcionProducto, double precio) throws BusinessException, NotFoundException;
 	
-	public List<Producto> findByDercipcionOrderByPrecioAsc(String descripcionProducto, double precio) throws BusinessException, NotFoundException;
+	public List<Producto> findByDescripcionOrderByPrecioAsc(String descripcionProducto) throws BusinessException, NotFoundException;
 	
-	public List<Producto> findFirst2ByDercipcionOrderByPrecioAsc(String descripcionProducto, double precio) throws BusinessException, NotFoundException;
+	public List<Producto> findFirst2ByDescripcionOrderByPrecioAsc(String descripcionProducto) throws BusinessException, NotFoundException;
 
 }

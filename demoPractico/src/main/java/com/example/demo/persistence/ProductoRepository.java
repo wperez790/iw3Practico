@@ -15,6 +15,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 	
 	Optional<Producto> findByDescripcion(String descripcionProducto) throws BusinessException, NotFoundException;
 	Optional<Producto> findByDescripcionAndPrecio(String descripcionProducto, double precio) throws BusinessException, NotFoundException;
-	Optional<List<Producto>> findByDercipcionOrderByPrecioAsc(String descripcionProducto, double precio ) throws BusinessException, NotFoundException;
-	Optional<List<Producto>> findFirst2ByDescripcionOrderByPrecioAsc(String descripcionProducto, double precio) throws BusinessException, NotFoundException;
+	Optional<List<Producto>> findByDescripcionOrderByPrecioAsc(String descripcionProducto) throws BusinessException, NotFoundException;
+	Optional<List<Producto>> findFirst2ByDescripcionOrderByPrecioAsc(String descripcionProducto) throws BusinessException, NotFoundException;
 }

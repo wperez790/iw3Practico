@@ -30,6 +30,7 @@ public class ProductoRestController {
 
 	@GetMapping("")
 	public ResponseEntity<List<Producto>> list() {
+		
 		try {
 			return new ResponseEntity<List<Producto>>(productoBusiness.list(), HttpStatus.OK);
 		} catch (BusinessException e) {
@@ -39,6 +40,7 @@ public class ProductoRestController {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Producto> load(@PathVariable("id") int idProducto) {
+		
 		try {
 			return new ResponseEntity<Producto>(productoBusiness.load(idProducto), HttpStatus.OK);
 		} catch (BusinessException e) {
@@ -50,6 +52,7 @@ public class ProductoRestController {
 
 	@PostMapping(value = "")
 	public ResponseEntity<String> insert(@RequestBody Producto producto) {
+		
 		try {
 			productoBusiness.save(producto);
 			HttpHeaders responseHeaders = new HttpHeaders();
@@ -62,6 +65,7 @@ public class ProductoRestController {
 
 	@PutMapping(value = "")
 	public ResponseEntity<String> update(@RequestBody Producto producto) {
+		
 		try {
 			productoBusiness.save(producto);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -72,6 +76,7 @@ public class ProductoRestController {
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") int idProducto) {
+		
 		try {
 			productoBusiness.remove(idProducto);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -84,6 +89,7 @@ public class ProductoRestController {
 	
 	@GetMapping(value = "/descripcion")
 	public ResponseEntity<Producto> findByDescripcion(@RequestParam("desc") String descripcionProducto) {
+		
 		try {
 			return new ResponseEntity<Producto>(productoBusiness.findByDescripcion(descripcionProducto), HttpStatus.OK);
 		} catch (BusinessException e) {
@@ -95,6 +101,7 @@ public class ProductoRestController {
 	
 	@GetMapping(value = "/descripcionAndPrecio")
 	public ResponseEntity<Producto> findByDescripcionAndPrecio(@RequestParam("desc") String descripcionProducto, @RequestParam("p") double precio) {
+		
 		try {
 			return new ResponseEntity<Producto>(productoBusiness.findByDescripcionAndPrecio(descripcionProducto, precio), HttpStatus.OK);
 		} catch (BusinessException e) {
@@ -105,13 +112,27 @@ public class ProductoRestController {
 	}
 	
 	@GetMapping(value = "/descripcionAndPrecioList")
-	public ResponseEntity<Producto> findByDercipcionOrderByPrecioAsc(@RequestParam("desc") String descripcionProducto, @RequestParam("p") double precio) {
+	public ResponseEntity<List<Producto>> findByDercipcionOrderByPrecioAsc(@RequestParam("desc") String descripcionProducto) {
+		
 		try {
-			return new ResponseEntity<Producto>(productoBusiness.findByDescripcionAndPrecio(descripcionProducto, precio), HttpStatus.OK);
+			return new ResponseEntity<List<Producto>>(productoBusiness.findByDescripcionOrderByPrecioAsc(descripcionProducto), HttpStatus.OK);
 		} catch (BusinessException e) {
-			return new ResponseEntity<Producto>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (NotFoundException e) {
-			return new ResponseEntity<Producto>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Producto>>(HttpStatus.NOT_FOUND);
 		}
+	}
+	
+	@GetMapping(value="/descripcionAndPrecio2List")
+	public ResponseEntity<List<Producto>> findFirst2ByDescripcionOrderByPrecioAsc(@RequestParam("desc") String descripcionProducto) {
+		
+		try {
+			return new ResponseEntity<List<Producto>>(productoBusiness.findFirst2ByDescripcionOrderByPrecioAsc(descripcionProducto), HttpStatus.OK);
+		} catch (BusinessException e) {
+			return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(NotFoundException e) {
+			return new ResponseEntity<List<Producto>>(HttpStatus.NOT_FOUND); 
+		}
+		
 	}
 }

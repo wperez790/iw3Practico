@@ -101,23 +101,30 @@ public class ProductoBusiness implements IProductoBusiness {
 	}
 
 	@Override
-	public List<Producto> findByDercipcionOrderByPrecioAsc(String descripcionProducto, double precio) throws BusinessException, NotFoundException{
+	public List<Producto> findByDescripcionOrderByPrecioAsc(String descripcionProducto) throws BusinessException, NotFoundException{
 		Optional<List<Producto>> op = null;
 		try {
-			op = productoDAO.findByDercipcionOrderByPrecioAsc(descripcionProducto, precio);
+			op = productoDAO.findByDescripcionOrderByPrecioAsc(descripcionProducto);
 		} catch (Exception e) {
 			throw new BusinessException(e);
 		}
 		if (!op.isPresent())
-			throw new NotFoundException("No se encuentra la lista de productos con descripcion=" + descripcionProducto + "y precio= "+ precio );
+			throw new NotFoundException("No se encuentra la lista de productos con descripcion=" );
 		return op.get();
 	}
 
 	@Override
-	public List<Producto> findFirst2ByDercipcionOrderByPrecioAsc(String descripcionProducto, double precio)
-			throws BusinessException, NotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Producto> findFirst2ByDescripcionOrderByPrecioAsc(String descripcionProducto) throws BusinessException, NotFoundException {
+		
+		Optional<List<Producto>> op = null;
+		try {
+			op = productoDAO.findFirst2ByDescripcionOrderByPrecioAsc(descripcionProducto);
+		} catch (Exception e) {
+			throw new BusinessException(e);
+		}
+		if (!op.isPresent())
+			throw new NotFoundException("No se encuentra la lista de productos con descripcion=" + descripcionProducto );
+		return op.get();
 	}
 
 }
