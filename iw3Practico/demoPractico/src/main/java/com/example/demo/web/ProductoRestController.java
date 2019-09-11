@@ -231,7 +231,7 @@ public class ProductoRestController {
 		}
 		
 		try {
-				return new ResponseEntity<List<Producto>>(productoBusiness.findByFechaVencimientoAfter(date), HttpStatus.OK);
+				return new ResponseEntity<List<Producto>>(productoBusiness.findByFechaVencimientoBefore(date), HttpStatus.OK);
 		} catch (BusinessException e) {
 			return new ResponseEntity<List<Producto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch(NotFoundException e) {
